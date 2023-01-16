@@ -19,7 +19,7 @@ namespace ProjetoTeste.Contas
         public void Deposito(double valor);
         public double Saldo();
         public void Extrato();
-        public void Transferir(double valor, IConta conta);
+        public void Transferir(double valor, ContaCorrente conta);
         public void AlterarDados();
 
     }

@@ -28,7 +28,7 @@ namespace ProjetoTeste.Contas
             }
             else
             {
-                ValorSaldo = ValorSaldo - valor;
+                ValorSaldo -= valor;
                 Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo}");
             }
         }
@@ -55,9 +55,17 @@ namespace ProjetoTeste.Contas
                 Console.WriteLine(item);
             }
         }
-        public void Transferir(double valor, IConta conta)
+        public void Transferir(double valor, ContaCorrente conta)
         {
-
+            if (valor >= ValorSaldo)
+            {
+                ChequeEspecial(valor);
+            }
+            else
+            {
+                ValorSaldo -= valor;
+                conta.ValorSaldo += valor;
+            }
         }
         public void AlterarDados()
         {
@@ -67,6 +75,21 @@ namespace ProjetoTeste.Contas
         {
             double saldoTotal = LimiteChequeEspecial + ValorSaldo;
             if(saldoTotal >= valor)
+            {
+                double limite = LimiteChequeEspecial;
+                ValorSaldo -= valor;
+                Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo - (limite - LimiteChequeEspecial)}");
+            }
+            else
+            {
+                throw new SaldoInsuficienteException("Saldo insuficiente.");
+            }
+        }
+        //ContaCorrente conta não está recebendo valor quando é utilizado ChequeEspecial - Corrigir
+        public void ChequeEspecial(double valor, ContaCorrente conta)
+        {
+            double saldoTotal = LimiteChequeEspecial + ValorSaldo;
+            if (saldoTotal >= valor)
             {
                 double limite = LimiteChequeEspecial;
                 ValorSaldo -= valor;
