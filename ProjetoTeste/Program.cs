@@ -5,10 +5,15 @@ using ProjetoTeste.Excecoes;
 ContaCorrente wesley = new ContaCorrente();
 try
 {
-    Console.WriteLine(wesley.ValorSaldo);
-    wesley.Deposito(500);
-    wesley.Saque(100);
-    wesley.Extrato();
+    Console.WriteLine($"Saldo = {wesley.ValorSaldo}");
+    wesley.Saque(400);
+    Console.WriteLine($"Saldo = {wesley.ValorSaldo}");
+    wesley.Saque(50);
+    Console.WriteLine($"Saldo = {wesley.ValorSaldo}");
+    wesley.Saque(50);
+    Console.WriteLine($"Saldo = {wesley.ValorSaldo}");
+    wesley.Deposito(1000);
+    Console.WriteLine($"Saldo = {wesley.ValorSaldo}");
 }
 catch (SaldoInsuficienteException e)
 {

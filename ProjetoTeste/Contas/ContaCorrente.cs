@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,13 @@ namespace ProjetoTeste.Contas
         public int Agencia { get; }
         public double ValorSaldo { get; private set; }
         public ArrayList Transacoes { get; private set; } = new ArrayList();
+        public double LimiteChequeEspecial { get; private set; } = 500;
 
         public void Saque(double valor)
         {
-            if (valor > ValorSaldo)
+            if (valor >= ValorSaldo)
             {
-                throw new SaldoInsuficienteException($"Saldo insuficiente para realizar um saque no valor de R$ {valor}.");
+                ChequeEspecial(valor);
             }
             else
             {
@@ -60,6 +62,20 @@ namespace ProjetoTeste.Contas
         public void AlterarDados()
         {
 
+        }
+        public void ChequeEspecial(double valor)
+        {
+            double saldoTotal = LimiteChequeEspecial + ValorSaldo;
+            if(saldoTotal >= valor)
+            {
+                double limite = LimiteChequeEspecial;
+                ValorSaldo -= valor;
+                Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo - (limite - LimiteChequeEspecial)}");
+            }
+            else
+            {
+                throw new SaldoInsuficienteException("Saldo insuficiente.");
+            }
         }
     }
 }
