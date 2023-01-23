@@ -9,18 +9,9 @@ using System.Threading.Tasks;
 
 namespace ProjetoTeste.Contas
 {
-    public class ContaCorrente : IConta
+    public class ContaCorrente : Contas
     {
-        public string Nome { get; }
-        public string Cpf { get; }
-        public double RendaMensal { get; }
-        public int Conta { get; }
-        public int Agencia { get; }
-        public double ValorSaldo { get; private set; }
-        public ArrayList Transacoes { get; private set; } = new ArrayList();
-        public double LimiteChequeEspecial { get; private set; } = 500;
-
-        public void Saque(double valor)
+        public override void Saque(double valor)
         {
             if (valor >= ValorSaldo)
             {
@@ -28,56 +19,31 @@ namespace ProjetoTeste.Contas
             }
             else
             {
-                ValorSaldo -= valor;
+                double novoValor = ValorSaldo - valor;
+                setValorSaldo(novoValor);
                 Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo}");
             }
         }
-        public void Deposito(double valor)
-        {
-            if (valor < 0)
-            {
-                throw new ValorInvalidoException($"Não é possível realizar um depósito no valor de R$ {valor}. Operação cancelada.");
-            }
-            else
-            {
-                ValorSaldo = ValorSaldo + valor;
-                Transacoes.Add($"Depósito: R$ {valor}. Novo saldo: R$ {ValorSaldo}");
-            }
-        }
-        public double Saldo()
-        {
-            return ValorSaldo;
-        }
-        public void Extrato()
-        {
-            foreach (var item in Transacoes)
-            {
-                Console.WriteLine(item);
-            }
-        }
-        public void Transferir(double valor, ContaCorrente conta)
+        public override void Transferir(double valor, Contas conta)
         {
             if (valor >= ValorSaldo)
             {
-                ChequeEspecial(valor);
+                ChequeEspecial(valor, conta);
             }
             else
             {
-                ValorSaldo -= valor;
-                conta.ValorSaldo += valor;
+                setValorSaldo(valor);
+                conta.setValorSaldo(valor);
             }
-        }
-        public void AlterarDados()
-        {
-
         }
         public void ChequeEspecial(double valor)
         {
             double saldoTotal = LimiteChequeEspecial + ValorSaldo;
-            if(saldoTotal >= valor)
+            if (saldoTotal >= valor)
             {
                 double limite = LimiteChequeEspecial;
-                ValorSaldo -= valor;
+                double novoValor = ValorSaldo - valor;
+                setValorSaldo(novoValor);
                 Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo - (limite - LimiteChequeEspecial)}");
             }
             else
@@ -85,15 +51,19 @@ namespace ProjetoTeste.Contas
                 throw new SaldoInsuficienteException("Saldo insuficiente.");
             }
         }
-        //ContaCorrente conta não está recebendo valor quando é utilizado ChequeEspecial - Corrigir
-        public void ChequeEspecial(double valor, ContaCorrente conta)
+
+        public void ChequeEspecial(double valor, Contas conta)
         {
             double saldoTotal = LimiteChequeEspecial + ValorSaldo;
             if (saldoTotal >= valor)
             {
                 double limite = LimiteChequeEspecial;
-                ValorSaldo -= valor;
-                Transacoes.Add($"Saque: R$ {valor}. Novo saldo: R$ {ValorSaldo - (limite - LimiteChequeEspecial)}");
+                double novoValor = ValorSaldo - valor;
+                setValorSaldo(novoValor);
+                double novoValorConta = conta.ValorSaldo + valor;
+                conta.setValorSaldo(novoValorConta);
+                Transacoes.Add($"Transferência env.: R$ {valor}. Novo saldo: R$ {ValorSaldo - (limite - LimiteChequeEspecial)}");
+                conta.Transacoes.Add($"Transferência rec.: R$ {valor}. Novo saldo: R$ {conta.ValorSaldo}");
             }
             else
             {
