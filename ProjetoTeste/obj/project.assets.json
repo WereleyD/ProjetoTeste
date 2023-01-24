@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\wdiet\\.nuget\\packages\\": {}
+    "C:\\Users\\wesleyd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wdiet\\source\\repos\\ProjetoTeste\\ProjetoTeste\\ProjetoTeste.csproj",
+      "projectUniqueName": "C:\\Users\\wesleyd\\source\\repos\\ProjetoTeste\\ProjetoTeste\\ProjetoTeste.csproj",
       "projectName": "ProjetoTeste",
-      "projectPath": "C:\\Users\\wdiet\\source\\repos\\ProjetoTeste\\ProjetoTeste\\ProjetoTeste.csproj",
-      "packagesPath": "C:\\Users\\wdiet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wdiet\\source\\repos\\ProjetoTeste\\ProjetoTeste\\obj\\",
+      "projectPath": "C:\\Users\\wesleyd\\source\\repos\\ProjetoTeste\\ProjetoTeste\\ProjetoTeste.csproj",
+      "packagesPath": "C:\\Users\\wesleyd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wesleyd\\source\\repos\\ProjetoTeste\\ProjetoTeste\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\wdiet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\wesleyd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

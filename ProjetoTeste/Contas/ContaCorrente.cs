@@ -11,6 +11,8 @@ namespace ProjetoTeste.Contas
 {
     public class ContaCorrente : Contas
     {
+        public double LimiteChequeEspecial { get; private set; } = 500;
+
         public override void Saque(double valor)
         {
             if (valor >= ValorSaldo)

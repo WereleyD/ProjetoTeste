@@ -10,6 +10,7 @@ try
     josnei.Saque(100);
     wesley.Transferir(200, josnei);
     josnei.Extrato();
+    wesley.setValorSaldo(100); // não deveria funcionar - ajustar
 
 }
 catch (SaldoInsuficienteException e)

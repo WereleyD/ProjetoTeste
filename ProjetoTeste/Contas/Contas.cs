@@ -17,11 +17,10 @@ namespace ProjetoTeste.Contas
         public int Agencia { get; private set; }
         public double ValorSaldo { get; private set; }
         public ArrayList Transacoes { get; private set; } = new ArrayList();
-        public double LimiteChequeEspecial { get; private set; } = 500;
 
 
-        //precisa ser protected. Ajustar
-        public void setValorSaldo(double valorSaldo)
+        //protected internal permite acessar fora do namespace - corrigir
+        protected internal void setValorSaldo(double valorSaldo)
         {
             ValorSaldo = valorSaldo;
         }
